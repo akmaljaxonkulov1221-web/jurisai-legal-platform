@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
-import { openaiClient } from '@/lib/openai';
+import { createCompletion } from '@/lib/openai';
 import { trackUsage } from '@/lib/usage-tracking';
 import { 
   generateArizaPrompt, 
@@ -52,7 +52,7 @@ async function generateDocumentWithOpenAI(documentType: string, details: any) {
   const prompt = prompts[documentType] || prompts.default;
 
   try {
-    const content = await openaiClient.generateText(prompt);
+    const content = await createCompletion(prompt);
     
     return {
       type: documentType,

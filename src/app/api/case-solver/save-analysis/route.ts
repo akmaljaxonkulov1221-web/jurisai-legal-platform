@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
     };
 
     // Save analysis to database
-    const { data, error } = await supabase
+    const { data, error } = await supabase!!
       .from('irac_analyses')
       .insert([{
         id: analysisId,

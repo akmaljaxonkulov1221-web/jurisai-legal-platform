@@ -55,7 +55,7 @@ async function checkTransaction(params: any) {
   const { account, amount, id } = params;
   
   // Check if user exists and subscription is valid
-  const { data: user, error } = await supabase
+  const { data: user, error } = await supabase!!
     .from('profiles')
     .select('*')
     .eq('id', account.user_id)
@@ -88,7 +88,7 @@ async function createTransaction(params: any) {
   const { account, amount, id, time } = params;
   
   // Create transaction record
-  const { data: transaction, error } = await supabase
+  const { data: transaction, error } = await supabase!
     .from('orders')
     .insert({
       user_id: account.user_id,
@@ -135,7 +135,7 @@ async function performTransaction(params: any) {
   const { id, account, amount } = params;
   
   // Find transaction
-  const { data: invoice, error: findError } = await supabase
+  const { data: invoice, error: findError } = await supabase!
     .from('orders')
     .select('*')
     .eq('metadata->>payme_transaction_id', id)
@@ -155,7 +155,7 @@ async function performTransaction(params: any) {
   }
 
   // Update invoice status to paid
-  const { error: updateError } = await supabase
+  const { error: updateError } = await supabase!
     .from('orders')
     .update({
       status: 'PAID',
@@ -168,7 +168,7 @@ async function performTransaction(params: any) {
   }
 
   // Update user subscription
-  const { data: user, error: userError } = await supabase
+  const { data: user, error: userError } = await supabase!
     .from('profiles')
     .select('*')
     .eq('id', account.user_id)
@@ -176,7 +176,7 @@ async function performTransaction(params: any) {
 
   if (user && !userError) {
     // Activate or extend subscription
-    const { data: plan, error: planError } = await supabase
+    const { data: plan, error: planError } = await supabase!
       .from('subscription_plans')
       .select('*')
       .eq('price', amount / 100)
@@ -185,14 +185,14 @@ async function performTransaction(params: any) {
 
     if (plan && !planError) {
       // First check if subscription exists
-      const { data: existingSubscription, error: existingError } = await supabase
+      const { data: existingSubscription, error: existingError } = await supabase!
         .from('subscriptions')
         .select('*')
         .eq('user_id', user.id)
         .single();
 
       if (existingSubscription && !existingError) {
-        await supabase
+        await supabase!
           .from('subscriptions')
           .update({
             plan_id: plan.id,
@@ -203,7 +203,7 @@ async function performTransaction(params: any) {
           })
           .eq('id', existingSubscription.id);
       } else {
-        await supabase
+        await supabase!
           .from('subscriptions')
           .insert({
             user_id: user.id,
@@ -233,14 +233,14 @@ async function cancelTransaction(params: any) {
   const { id } = params;
   
   // Find and cancel transaction
-  const { data: invoice, error: findError } = await supabase
+  const { data: invoice, error: findError } = await supabase!
     .from('orders')
     .select('*')
     .eq('metadata->>payme_transaction_id', id)
     .single();
 
   if (invoice && !findError) {
-    await supabase
+    await supabase!
       .from('orders')
       .update({ status: 'VOID' })
       .eq('id', invoice.id);
@@ -260,7 +260,7 @@ async function cancelTransaction(params: any) {
 async function checkTransactionStatus(params: any) {
   const { id } = params;
   
-  const { data: invoice, error } = await supabase
+  const { data: invoice, error } = await supabase!
     .from('orders')
     .select('*')
     .eq('metadata->>payme_transaction_id', id)
@@ -285,7 +285,7 @@ async function checkTransactionStatus(params: any) {
 async function getStatement(params: any) {
   const { from, to } = params;
   
-  const { data: invoices, error } = await supabase
+  const { data: invoices, error } = await supabase!
     .from('orders')
     .select('*')
     .gte('created_at', new Date(Number(from)).toISOString())

@@ -21,6 +21,10 @@ export async function GET(request: NextRequest) {
     }
 
     // Get usage tracking data from Supabase
+    if (!supabase) {
+      return NextResponse.json({ error: 'Supabase not configured' }, { status: 500 });
+    }
+
     const { data: usageData, error } = await supabase
       .from('usage_tracking')
       .select('*')

@@ -123,7 +123,7 @@ async function analyzeCaseWithAI(caseText: string) {
 
 async function trackUsage(feature: string, metadata?: any) {
   try {
-    await supabase.from('usage_tracking').insert({
+    await supabase!.from('usage_tracking').insert({
       id: crypto.randomUUID(),
       user_id: 'demo-user', // Replace with actual user ID
       feature,

@@ -14,6 +14,10 @@ export async function GET(request: NextRequest) {
     const skip = (page - 1) * limit;
 
     // Build query for search and filters
+    if (!supabase) {
+      return NextResponse.json({ error: 'Supabase not configured' }, { status: 500 });
+    }
+
     let query = supabase
       .from('users')
       .select('*', { count: 'exact' })
@@ -40,14 +44,14 @@ export async function GET(request: NextRequest) {
     // Get subscription history for each user
     const formattedUsers = await Promise.all(
       (users || []).map(async (user) => {
-        const { data: subscriptions } = await supabase
+        const { data: subscriptions } = await supabase!
           .from('subscription_history')
           .select('*')
           .eq('user_id', user.id)
           .order('started_at', { ascending: false })
           .limit(1);
 
-        const { data: usageCount } = await supabase
+        const { data: usageCount } = await supabase!
           .from('usage_tracking')
           .select('id', { count: 'exact' })
           .eq('user_id', user.id);
@@ -105,7 +109,7 @@ export async function PATCH(request: NextRequest) {
     }
 
     // Check if user exists
-    const { data: user, error: fetchError } = await supabase
+    const { data: user, error: fetchError } = await supabase!
       .from('users')
       .select('*')
       .eq('id', userId)
@@ -122,7 +126,7 @@ export async function PATCH(request: NextRequest) {
 
     switch (action) {
       case 'block':
-        updatedUser = await supabase
+        updatedUser = await supabase!
           .from('users')
           .update({ status: 'SUSPENDED' })
           .eq('id', userId)
@@ -131,7 +135,7 @@ export async function PATCH(request: NextRequest) {
         break;
 
       case 'unblock':
-        updatedUser = await supabase
+        updatedUser = await supabase!
           .from('users')
           .update({ status: 'ACTIVE' })
           .eq('id', userId)
@@ -158,7 +162,7 @@ export async function PATCH(request: NextRequest) {
         expiresAt.setMonth(expiresAt.getMonth() + 1);
 
         // Update user subscription
-        updatedUser = await supabase
+        updatedUser = await supabase!
           .from('users')
           .update({
             subscription_plan: data.planId,
@@ -169,7 +173,7 @@ export async function PATCH(request: NextRequest) {
           .single();
 
         // Add to subscription history
-        await supabase
+        await supabase!
           .from('subscription_history')
           .insert({
             id: crypto.randomUUID(),
@@ -191,7 +195,7 @@ export async function PATCH(request: NextRequest) {
           );
         }
 
-        updatedUser = await supabase
+        updatedUser = await supabase!
           .from('users')
           .update({ role: data.role })
           .eq('id', userId)

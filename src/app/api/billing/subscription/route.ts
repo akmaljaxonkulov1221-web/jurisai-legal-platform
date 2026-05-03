@@ -14,7 +14,7 @@ export async function GET(request: Request) {
     }
 
     // Verify user with Supabase
-    const { data: { user }, error } = await supabase.auth.getUser(authHeader);
+    const { data: { user }, error } = await supabase!.auth.getUser(authHeader);
     
     if (error || !user?.id) {
       return NextResponse.json(
@@ -24,7 +24,7 @@ export async function GET(request: Request) {
     }
 
     // Get user's subscription from Supabase
-    const { data: subscription, error: subError } = await supabase
+    const { data: subscription, error: subError } = await supabase!
       .from('subscriptions')
       .select(`
         *,

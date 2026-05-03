@@ -16,7 +16,7 @@ export async function POST(
     }
 
     // Update simulation status to paused
-    const { data, error } = await supabase
+    const { data, error } = await supabase!
       .from('court_simulations')
       .update({ 
         status: 'paused',

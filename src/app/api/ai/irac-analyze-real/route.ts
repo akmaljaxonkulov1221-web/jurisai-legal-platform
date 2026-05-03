@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
-import { openaiClient } from '@/lib/openai';
+import { createCompletion } from '@/lib/openai';
 import { trackUsage } from '@/lib/usage-tracking';
 import { extractSection, extractSources, calculateConfidence, getMockAnalysis } from '@/lib/irac-analysis/utils';
 
@@ -64,7 +64,7 @@ Javobingizni quyidagi formatda tuzing:
 `;
 
   try {
-    const response = await openaiClient.generateText(prompt);
+    const response = await createCompletion(prompt);
     
     // Parse response and extract confidence
     const confidence = calculateConfidence(caseText, response);

@@ -43,7 +43,7 @@ export async function POST(
     };
 
     // Update simulation status to completed
-    const { data, error } = await supabase
+    const { data, error } = await supabase!
       .from('court_simulations')
       .update({ 
         status: 'completed',

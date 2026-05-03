@@ -21,6 +21,10 @@ export async function GET(request: NextRequest) {
     }
 
     // Get payments data from Supabase
+    if (!supabase) {
+      return NextResponse.json({ error: 'Supabase not configured' }, { status: 500 });
+    }
+
     const { data: payments, error } = await supabase
       .from('payments')
       .select('*')

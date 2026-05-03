@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
     let userId = null;
     let userEmail = null;
 
-    if (authHeader) {
+    if (authHeader && supabase) {
       // Verify user with Supabase
       const { data: { user }, error } = await supabase.auth.getUser(authHeader);
       if (!error && user?.id) {
@@ -36,6 +36,10 @@ export async function POST(request: NextRequest) {
     }
     
     // Create feedback record
+    if (!supabase) {
+      return NextResponse.json({ error: 'Supabase not configured' }, { status: 500 });
+    }
+    
     const { data: feedback, error: insertError } = await supabase
       .from('feedback')
       .insert({

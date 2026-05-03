@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Verify user with Supabase
-    const { data: { user }, error } = await supabase.auth.getUser(authHeader);
+    const { data: { user }, error } = await supabase!.auth.getUser(authHeader);
     
     if (error || !user?.id) {
       return NextResponse.json(
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     const { planId } = await request.json();
 
     // Get the plan from Supabase
-    const { data: plan, error: planError } = await supabase
+    const { data: plan, error: planError } = await supabase!
       .from('subscription_plans')
       .select('*')
       .eq('id', planId)
@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Get user from Supabase
-    const { data: userData, error: userError } = await supabase
+    const { data: userData, error: userError } = await supabase!
       .from('profiles')
       .select('*')
       .eq('id', user.id)

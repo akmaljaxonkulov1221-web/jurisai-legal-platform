@@ -23,7 +23,7 @@ export async function POST(request: Request) {
     }
 
     // Verify user with Supabase
-    const { data: { user }, error } = await supabase.auth.getUser(authHeader);
+    const { data: { user }, error } = await supabase!.auth.getUser(authHeader);
     
     if (error || !user?.id) {
       return NextResponse.json(
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
     }
 
     // Get user's subscription from Supabase
-    const { data: subscription, error: subError } = await supabase
+    const { data: subscription, error: subError } = await supabase!
       .from('subscriptions')
       .select('*')
       .eq('user_id', user.id)
@@ -53,7 +53,7 @@ export async function POST(request: Request) {
     }
 
     // Update subscription in Supabase
-    const { error: updateError } = await supabase
+    const { error: updateError } = await supabase!
       .from('subscriptions')
       .update({
         status: 'CANCELED',

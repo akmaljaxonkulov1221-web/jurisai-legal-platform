@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
       created_at: new Date().toISOString()
     };
 
-    const { data, error } = await supabase
+    const { data, error } = await supabase!!
       .from('court_arguments')
       .insert([argumentData])
       .select()
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Update simulation status
-    await supabase
+    await supabase!
       .from('court_simulations')
       .update({ 
         last_action: 'Argument submitted',

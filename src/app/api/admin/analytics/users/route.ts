@@ -21,6 +21,10 @@ export async function GET(request: NextRequest) {
     }
 
     // Get users data from Supabase
+    if (!supabase) {
+      return NextResponse.json({ error: 'Supabase not configured' }, { status: 500 });
+    }
+
     const { data: users, error } = await supabase
       .from('users')
       .select('*')
