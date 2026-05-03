@@ -6,6 +6,17 @@ const nextConfig = {
   },
   serverExternalPackages: ['@prisma/client'],
   turbopack: {},
+  
+  // Netlify optimization - disable static export for API routes
+  // output: 'export', // Commented out to allow API routes
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
+  },
+  
+  // Static generation for better Netlify performance
+  generateEtags: false,
+  
   webpack: (config) => {
     config.optimization.splitChunks = {
       chunks: 'all',
