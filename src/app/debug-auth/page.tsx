@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { runAllTests, testLogin, testAuthHelper } from '@/lib/test-auth'
 import { createAdminUser, createTestUsers } from '@/lib/create-admin-user'
 import { checkEnvironmentVariables, checkSupabaseAccess } from '@/lib/check-env'
-import { checkEnvLocalFile, checkRuntimeEnvironment, validateSupabaseConfig } from '@/lib/check-env-local'
+import { checkEnvLocalFile, validateEnvironment } from '@/lib/check-env-local'
 
 export default function DebugAuthPage() {
   const [isLoading, setIsLoading] = useState(false)
@@ -19,7 +19,7 @@ export default function DebugAuthPage() {
       setResults(testResults)
     } catch (error) {
       console.error('Test error:', error)
-      setResults({ error: error.toString() })
+      setResults({ error: String(error) })
     }
     setIsLoading(false)
   }
@@ -47,15 +47,13 @@ export default function DebugAuthPage() {
       const envCheck = checkEnvironmentVariables()
       const accessCheck = await checkSupabaseAccess()
       const envLocalCheck = checkEnvLocalFile()
-      const runtimeCheck = checkRuntimeEnvironment()
-      const validationCheck = validateSupabaseConfig()
+      const validationCheck = validateEnvironment()
       
       setResults({
         environment: envCheck,
         access: accessCheck,
         envLocalFile: envLocalCheck,
-        runtimeEnvironment: runtimeCheck,
-        supabaseValidation: validationCheck,
+        validation: validationCheck,
       })
     } catch (error) {
       console.error('Environment check error:', error)
