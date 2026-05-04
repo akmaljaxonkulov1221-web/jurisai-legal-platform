@@ -5,10 +5,6 @@ compatibility_flags = ["nodejs_compat"]
 # Cloudflare Pages configuration
 pages_build_output_dir = ".vercel/output/static"
 
-[build]
-command = "npm run build:cloudflare"
-cwd = "."
-
 [env.production.vars]
 NEXTAUTH_URL = "https://jurisai.pages.dev"
 NEXTAUTH_SECRET = "your-secret-key-change-in-production"
