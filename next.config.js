@@ -7,17 +7,21 @@ const nextConfig = {
   serverExternalPackages: ['@prisma/client'],
   turbopack: {},
   
-  // Netlify optimization - enable server-side rendering
+  // Cloudflare Pages optimization
   trailingSlash: true,
   images: {
     unoptimized: true,
   },
   
-  // Static generation for better Netlify performance
+  // Static generation for better performance
   generateEtags: false,
   
   // Skip static generation for dynamic routes
   skipTrailingSlashRedirect: true,
+  
+  // Cloudflare Pages specific configuration - using server mode for API routes
+  // output: 'export',
+  // distDir: 'out',
   
   webpack: (config, { isServer }) => {
     if (!isServer) {

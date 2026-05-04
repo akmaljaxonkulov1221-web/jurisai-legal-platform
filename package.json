@@ -5,12 +5,15 @@
   "scripts": {
     "dev": "next dev",
     "build": "set NODE_OPTIONS=--max-old-space-size=4096 && next build",
+    "build:cloudflare": "set NODE_OPTIONS=--max-old-space-size=4096 && next build",
     "start": "next start",
     "lint": "next lint",
     "build:netlify": "set NODE_OPTIONS=--max-old-space-size=4096 && next build",
     "netlify:dev": "netlify dev",
     "netlify:build": "npm run build",
-    "build:standalone": "set NODE_OPTIONS=--max-old-space-size=4096 && next build"
+    "build:standalone": "set NODE_OPTIONS=--max-old-space-size=4096 && next build",
+    "wrangler:dev": "wrangler pages dev out",
+    "wrangler:deploy": "wrangler pages deploy out --project-name jurisai"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
