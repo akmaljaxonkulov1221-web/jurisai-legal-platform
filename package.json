@@ -8,15 +8,9 @@
     "build:cloudflare": "set NODE_OPTIONS=--max-old-space-size=4096 && next build",
     "start": "next start",
     "lint": "next lint",
-    "build:netlify": "set NODE_OPTIONS=--max-old-space-size=4096 && next build",
-    "netlify:dev": "netlify dev",
-    "netlify:build": "npm run build",
-    "build:standalone": "set NODE_OPTIONS=--max-old-space-size=4096 && next build",
+        "build:standalone": "set NODE_OPTIONS=--max-old-space-size=4096 && next build",
     "wrangler:dev": "wrangler pages dev out",
-    "wrangler:deploy": "wrangler pages deploy out --project-name jurisai",
-    "pages:build": "npx @cloudflare/next-on-pages",
-    "pages:dev": "npx @cloudflare/next-on-pages --watch",
-    "pages:deploy": "wrangler pages deploy .vercel/output/static --project-name jurisai"
+    "wrangler:deploy": "wrangler pages deploy out --project-name jurisai"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -49,16 +43,13 @@
   "engines": {
     "node": ">=20.9.0"
   },
-    "devDependencies": {
-        "@netlify/plugin-nextjs": "^4.29.0",
-    "@types/node": "^20",
+  "devDependencies": {
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "autoprefixer": "^10.5.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
-    "netlify-cli": "^17.0.0",
-    "postcss": "^8.5.13",
+        "postcss": "^8.5.13",
     "tailwindcss": "^3.4.19",
     "typescript": "^5"
   }
