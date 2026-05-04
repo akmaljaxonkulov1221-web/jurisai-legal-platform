@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "set NODE_OPTIONS=--max-old-space-size=4096 && next build",
-    "build:cloudflare": "set NODE_OPTIONS=--max-old-space-size=4096 && next build",
+    "build:cloudflare": "set NODE_OPTIONS=--max-old-space-size=4096 && npx @cloudflare/next-on-pages",
+    "build:cf": "set NODE_OPTIONS=--max-old-space-size=4096 && npx @cloudflare/next-on-pages",
     "start": "next start",
     "lint": "next lint",
     "build:netlify": "set NODE_OPTIONS=--max-old-space-size=4096 && next build",
@@ -13,7 +14,10 @@
     "netlify:build": "npm run build",
     "build:standalone": "set NODE_OPTIONS=--max-old-space-size=4096 && next build",
     "wrangler:dev": "wrangler pages dev out",
-    "wrangler:deploy": "wrangler pages deploy out --project-name jurisai"
+    "wrangler:deploy": "wrangler pages deploy out --project-name jurisai",
+    "pages:build": "npx @cloudflare/next-on-pages",
+    "pages:dev": "npx @cloudflare/next-on-pages --watch",
+    "pages:deploy": "wrangler pages deploy .vercel/output/static --project-name jurisai"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -47,6 +51,7 @@
     "node": ">=20.9.0"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.8.5",
     "@netlify/plugin-nextjs": "^4.29.0",
     "@types/node": "^20",
     "@types/react": "^19",

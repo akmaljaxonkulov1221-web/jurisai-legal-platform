@@ -4,6 +4,8 @@ import { createCompletion } from '@/lib/openai';
 import { trackUsage } from '@/lib/usage-tracking';
 import { extractSection, extractSources, calculateConfidence, getMockAnalysis } from '@/lib/irac-analysis/utils';
 
+export const runtime = 'edge';
+
 export async function POST(request: NextRequest) {
   try {
     const { caseText } = await request.json();

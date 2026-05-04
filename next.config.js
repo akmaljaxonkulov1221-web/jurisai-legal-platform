@@ -7,7 +7,7 @@ const nextConfig = {
   serverExternalPackages: ['@prisma/client'],
   turbopack: {},
   
-  // Cloudflare Pages optimization
+  // Cloudflare Pages Edge Runtime optimization
   trailingSlash: true,
   images: {
     unoptimized: true,
@@ -19,9 +19,14 @@ const nextConfig = {
   // Skip static generation for dynamic routes
   skipTrailingSlashRedirect: true,
   
-  // Cloudflare Pages specific configuration - using server mode for API routes
-  // output: 'export',
-  // distDir: 'out',
+  // Cloudflare Pages specific configuration
+  output: 'export',
+  distDir: 'out',
+  
+  // Edge Runtime configuration
+  experimental: {
+    runtime: 'edge',
+  },
   
   webpack: (config, { isServer }) => {
     if (!isServer) {

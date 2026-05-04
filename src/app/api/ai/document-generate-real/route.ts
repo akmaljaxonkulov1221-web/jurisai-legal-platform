@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { createCompletion } from '@/lib/openai';
 import { trackUsage } from '@/lib/usage-tracking';
+
+export const runtime = 'edge';
 import { 
   generateArizaPrompt, 
   generateShartnomaPrompt, 
