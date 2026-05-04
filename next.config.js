@@ -20,13 +20,8 @@ const nextConfig = {
   skipTrailingSlashRedirect: true,
   
   // Cloudflare Pages specific configuration
-  output: 'export',
-  distDir: 'out',
-  
-  // Edge Runtime configuration
-  experimental: {
-    runtime: 'edge',
-  },
+  // output: 'export',
+  // distDir: 'out',
   
   webpack: (config, { isServer }) => {
     if (!isServer) {

@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "set NODE_OPTIONS=--max-old-space-size=4096 && next build",
-    "build:cloudflare": "set NODE_OPTIONS=--max-old-space-size=4096 && npx @cloudflare/next-on-pages",
-    "build:cf": "set NODE_OPTIONS=--max-old-space-size=4096 && npx @cloudflare/next-on-pages",
+    "build:cloudflare": "set NODE_OPTIONS=--max-old-space-size=4096 && next build",
     "start": "next start",
     "lint": "next lint",
     "build:netlify": "set NODE_OPTIONS=--max-old-space-size=4096 && next build",
@@ -50,9 +49,8 @@
   "engines": {
     "node": ">=20.9.0"
   },
-  "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.8.5",
-    "@netlify/plugin-nextjs": "^4.29.0",
+    "devDependencies": {
+        "@netlify/plugin-nextjs": "^4.29.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
