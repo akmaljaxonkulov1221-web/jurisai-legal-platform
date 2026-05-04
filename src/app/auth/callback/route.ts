@@ -1,16 +1,25 @@
 import { createClient } from '@supabase/supabase-js'
 import { NextRequest, NextResponse } from 'next/server'
 
-// Create Supabase client
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+// Force static generation for this route
+export const dynamic = 'force-static'
 
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get('code')
   const next = searchParams.get('next') ?? '/dashboard'
+
+  // Check if environment variables are available
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    console.error('Supabase environment variables not configured')
+    return NextResponse.redirect(`${origin}/signin?error=${encodeURIComponent('Service configuration error')}`)
+  }
+
+  // Create Supabase client only when needed
+  const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
   if (code) {
     try {

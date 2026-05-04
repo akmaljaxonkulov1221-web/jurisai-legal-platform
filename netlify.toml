@@ -1,18 +1,20 @@
 [build]
-  # Build command for Next.js
+  # Build command for Next.js with standalone mode
   command = "npm run build"
-  # Directory to publish (Next.js build output)
+  # Directory to publish (Next.js standalone output)
   publish = ".next"
 
 [build.environment]
   # Node.js version
   NODE_VERSION = "18"
-  # Enable Next.js standalone mode for better performance
+  # Enable Next.js standalone mode
   NEXT_TELEMETRY_DISABLED = "1"
   # Force Next.js to use standalone build
   NEXT_BUILD_STANDALONE = "true"
+  # Set environment for standalone mode
+  NPM_FLAGS = "--production"
 
-# Next.js plugin configuration
+# Next.js plugin configuration for proper handling
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
@@ -27,7 +29,7 @@
   to = "/.netlify/functions/:splat"
   status = 200
 
-# Handle Next.js dynamic routes
+# Handle Next.js dynamic routes (fallback to index.html)
 [[redirects]]
   from = "/*"
   to = "/index.html"

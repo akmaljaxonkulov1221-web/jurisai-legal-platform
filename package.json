@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "set NODE_OPTIONS=--max-old-space-size=4096 && next dev",
+    "dev": "next dev",
     "build": "set NODE_OPTIONS=--max-old-space-size=4096 && next build",
-    "start": "set NODE_OPTIONS=--max-old-space-size=4096 && next start",
+    "start": "next start",
     "lint": "next lint",
-    "build:netlify": "next build",
-    "deploy": "npm run build && git add . && git commit -m 'Deploy to Hugging Face Spaces' && git push",
+    "build:netlify": "set NODE_OPTIONS=--max-old-space-size=4096 && next build",
     "netlify:dev": "netlify dev",
-    "netlify:build": "netlify build"
+    "netlify:build": "npm run build",
+    "build:standalone": "set NODE_OPTIONS=--max-old-space-size=4096 && next build"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
