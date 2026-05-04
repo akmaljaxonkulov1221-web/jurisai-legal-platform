@@ -2,15 +2,12 @@ name = "jurisai"
 compatibility_date = "2024-05-04"
 compatibility_flags = ["nodejs_compat"]
 
+# Cloudflare Pages configuration
+pages_build_output_dir = ".next"
+
 [build]
 command = "npm run build"
 cwd = "."
-watch_dir = "src"
-
-[build.upload]
-format = "modules"
-dir = ".next"
-main = "./server.js"
 
 [env.production.vars]
 NEXTAUTH_URL = "https://jurisai.pages.dev"
@@ -18,11 +15,6 @@ NEXTAUTH_SECRET = "your-secret-key-change-in-production"
 
 [env.production]
 compatibility_flags = ["nodejs_compat"]
-
-[[env.production.kv_namespaces]]
-binding = "CACHE"
-id = "your-kv-namespace-id"
-preview_id = "your-preview-kv-namespace-id"
 
 [vars]
 NEXTAUTH_URL = "https://jurisai.pages.dev"

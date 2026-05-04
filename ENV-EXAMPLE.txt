@@ -1,0 +1,27 @@
+# JurisAI Environment Variables Example
+# Bu faylni .env.local deb nomlang va to'ldiring
+
+# Supabase (majburiy)
+NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlvdXItcHJvamVjdC1pZCIsInJvbGUiOiJhbm9uIiwiaWF0IjoxNjE2NjY5NzQ0LCJleHAiOjE5MzIyNDU3NDR9.example
+
+# NextAuth (majburiy)
+NEXTAUTH_SECRET=super_secret_random_string_32_characters_long
+NEXTAUTH_URL=https://your-site.pages.dev
+
+# OpenAI (ixtiyoriy - AI funksiyalari uchun)
+OPENAI_API_KEY=sk-your-openai-api-key-here
+
+# Telegram bot (ixtiyoriy)
+TELEGRAM_BOT_TOKEN=your-telegram-bot-token
+
+# Stripe (ixtiyoriy - to'lovlar uchun)
+STRIPE_SECRET_KEY=sk_test_your-stripe-secret-key
+STRIPE_PUBLISHABLE_KEY=pk_test_your-stripe-publishable-key
+
+# Qanday olish:
+# 1. Supabase: https://supabase.com -> New Project -> Settings -> API
+# 2. NextAuth Secret: openssl rand -base64 32
+# 3. OpenAI: https://platform.openai.com -> API Keys
+# 4. Telegram: @BotFather -> /newbot
+# 5. Stripe: https://dashboard.stripe.com -> API keys
