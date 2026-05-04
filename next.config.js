@@ -20,7 +20,7 @@ const nextConfig = {
   skipTrailingSlashRedirect: true,
   
   // Cloudflare Pages specific configuration
-  // output: 'export',
+  // output: 'standalone',
   // distDir: 'out',
   
   webpack: (config, { isServer }) => {
